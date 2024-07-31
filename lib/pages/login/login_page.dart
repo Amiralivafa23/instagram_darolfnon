@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:inastagram/generated/assets.dart';
-import 'package:inastagram/theme/colors.dart';
 
 class LoginPage extends StatelessWidget {
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
