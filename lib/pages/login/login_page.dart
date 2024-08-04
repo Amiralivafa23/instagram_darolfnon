@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inastagram/generated/assets.dart';
+import 'package:inastagram/pages/home_page/home_page.dart';
 
 class LoginPage extends StatelessWidget {
-  GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginForm = GlobalKey<FormState>();
+  TextEditingController userNameController = TextEditingController();
+
+  String email = '';
 
   @override
   Widget build(BuildContext context) {
@@ -22,37 +26,42 @@ class LoginPage extends StatelessWidget {
               height: 32,
             ),
             Form(
-                key: globalKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Username'),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please fill field';
-                        }
-                        else if (value.length < 8) {
-                          return 'not correct';
-                        }
-                        return '';
-                      },
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please fill field';
-                        }
-
-                        return '';
-                      },
-                      decoration: InputDecoration(hintText: 'Password'),
-                    ),
-                  ],
-                )),
+              key: loginForm,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: userNameController,
+                    onChanged: (value) {
+                      email = value;
+                    },
+                    decoration: InputDecoration(hintText: 'Username'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your username';
+                      } else if (value.length <= 4) {
+                        return 'username is not correct';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your password';
+                      } else if (value.length <= 4) {
+                        return 'username is not correct';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(hintText: 'Password'),
+                  ),
+                ],
+              ),
+            ),
             Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -64,8 +73,14 @@ class LoginPage extends StatelessWidget {
               width: double.infinity,
               child: FilledButton(
                   onPressed: () {
-                    if (globalKey.currentState!.validate()) {
-                      print('welcome');
+                    if (loginForm.currentState!.validate()) {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(
+                              email: email,
+                            ),
+                          ));
                     }
                   },
                   child: const Text('Login')),

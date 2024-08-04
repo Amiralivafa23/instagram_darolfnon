@@ -5,10 +5,16 @@ ThemeData myTheme() {
   return ThemeData(
       dividerTheme: DividerThemeData(color: surfaceColor),
       fontFamily: 'Poppins',
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          showUnselectedLabels: false,
+          unselectedIconTheme: IconThemeData(size: 30,color: Colors.grey),
+          selectedIconTheme: IconThemeData(color: Colors.black, size: 30),
+          showSelectedLabels: false,
+          type: BottomNavigationBarType.fixed),
       filledButtonTheme: FilledButtonThemeData(
           style: ButtonStyle(
               textStyle: const MaterialStatePropertyAll(
-                  TextStyle(fontWeight: FontWeight.w800,fontSize: 18  )),
+                  TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
               padding: const MaterialStatePropertyAll(
                   EdgeInsets.symmetric(vertical: 16)),
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
