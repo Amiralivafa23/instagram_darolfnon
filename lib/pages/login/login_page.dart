@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:inastagram/generated/assets.dart';
 import 'package:inastagram/pages/home_page/home_page.dart';
 
@@ -10,6 +12,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _keyboardVisible = MediaQuery.of(context).viewInsets.bottom == 0;
+
     final mediaQuery = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -62,10 +66,13 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
             ),
-            Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {}, child: const Text('Forgot password?'))),
+            Visibility(
+              visible: _keyboardVisible,
+              child: Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                      onPressed: () {}, child: const Text('Forgot password?'))),
+            ),
             const SizedBox(
               height: 16,
             ),
@@ -88,38 +95,47 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.facebook,
-                ),
-                label: const Text('Log in with Facebook')),
+            Visibility(
+              visible: _keyboardVisible,
+              child: TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.facebook,
+                  ),
+                  label: const Text('Log in with Facebook')),
+            ),
             const SizedBox(
               height: 16,
             ),
-            const Row(
-              children: [
-                Expanded(flex: 2, child: Divider()),
-                Expanded(
-                    flex: 1,
-                    child: Center(
-                        child: Text(
-                      'OR',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w800, color: Colors.grey),
-                    ))),
-                Expanded(flex: 2, child: Divider()),
-              ],
+            Visibility(
+              visible: _keyboardVisible,
+              child: const Row(
+                children: [
+                  Expanded(flex: 2, child: Divider()),
+                  Expanded(
+                      flex: 1,
+                      child: Center(
+                          child: Text(
+                        'OR',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800, color: Colors.grey),
+                      ))),
+                  Expanded(flex: 2, child: Divider()),
+                ],
+              ),
             ),
             const Spacer(),
-            Text.rich(TextSpan(text: "Don't have an account?", children: [
-              WidgetSpan(
-                  alignment: PlaceholderAlignment.middle,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text('Sign up'),
-                  ))
-            ])),
+            Visibility(
+              visible: _keyboardVisible,
+              child: Text.rich(TextSpan(text: "Don't have an account?", children: [
+                WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text('Sign up'),
+                    ))
+              ])),
+            ),
             const SizedBox(
               height: 20,
             ),

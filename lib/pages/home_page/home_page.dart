@@ -1,5 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:inastagram/generated/assets.dart';
+import 'package:inastagram/models/story_model.dart';
+
+import 'story_widget.dart';
 
 class HomePage extends StatelessWidget {
   final String email;
@@ -9,17 +14,35 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: CarouselSlider(items: const [
-          ImagePost(
-            image:
-                'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset(
+                Assets.assetsIGTV,
+              )),
+          IconButton(onPressed: () {}, icon: Icon(Icons.chat_bubble_outline))
+        ],
+        title: Image.asset(
+          Assets.assetsInstagramLogo,
+          width: MediaQuery.of(context).size.width / 3,
+        ),
+        leading: IconButton(
+            onPressed: () {}, icon: const Icon(Icons.camera_alt_outlined)),
+      ),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 5,
+            width: double.infinity,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: storyList.length,
+              itemBuilder: (context, index) =>
+                  StoryWidget(storyModel: storyList[index]),
+            ),
           ),
-          ImagePost(
-            image:
-                'https://letsenhance.io/static/03620c83508fc72c6d2b218c7e304ba5/11499/UpscalerAfter.jpg',
-          ),
-        ], options: CarouselOptions(aspectRatio: 1 / 1, viewportFraction: 1)),
+        ],
       ),
     );
   }
