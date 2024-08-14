@@ -2,7 +2,8 @@
 class Assets {
   Assets._();
 
-  static const String assetsIGTV = 'assets/ic_igtv.svg';
+  static const String assetsIcIgtv = 'assets/ic_igtv.svg';
+  static const String assetsIcVerify = 'assets/ic_verify.svg';
   static const String assetsInstagramLogo = 'assets/instagram_logo.png';
   static const String assetsMq5OriginalAspect = 'assets/mq5-original-aspect.jpg';
 

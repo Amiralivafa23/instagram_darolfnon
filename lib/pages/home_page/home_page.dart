@@ -1,9 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inastagram/generated/assets.dart';
+import 'package:inastagram/models/post_model.dart';
 import 'package:inastagram/models/story_model.dart';
 
+import 'post_widget.dart';
 import 'story_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,7 +23,7 @@ class HomePage extends StatelessWidget {
           IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(
-                Assets.assetsIGTV,
+                Assets.assetsIcIgtv,
               )),
           IconButton(onPressed: () {}, icon: Icon(Icons.chat_bubble_outline))
         ],
@@ -30,18 +34,26 @@ class HomePage extends StatelessWidget {
         leading: IconButton(
             onPressed: () {}, icon: const Icon(Icons.camera_alt_outlined)),
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 5,
-            width: double.infinity,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: storyList.length,
-              itemBuilder: (context, index) =>
-                  StoryWidget(storyModel: storyList[index]),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height / 6,
+              width: double.infinity,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: storyList.length,
+                itemBuilder: (context, index) =>
+                    StoryWidget(storyModel: storyList[index]),
+              ),
             ),
           ),
+          SliverList.builder(
+            itemCount: fakePosts.length,
+            itemBuilder: (context, index) => PostWidget(
+              postModel: fakePosts[index],
+            ),
+          )
         ],
       ),
     );
