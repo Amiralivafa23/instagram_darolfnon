@@ -38,6 +38,14 @@ dependencies:
   flutter_svg: ^2.0.10+1
   animated_dashed_circle: ^0.0.5
   carousel_slider: ^4.2.1
+  mime: ^1.0.5
+  video_player: ^2.9.1
+  chewie: ^1.8.3
+
+
+
+
+
 
 
 dev_dependencies:

@@ -11,8 +11,7 @@ class PostWidget extends StatelessWidget {
 
   PostWidget({super.key, required this.postModel});
 
-  int currentIndex = 0;
-  CarouselController carouselController = CarouselController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +47,7 @@ class PostWidget extends StatelessWidget {
           ),
           MediaWidget(
             postModel: postModel,
-            currentIndex: currentIndex,
-            carouselController: carouselController,
+
           ),
           Row(
             children: [
@@ -61,29 +59,6 @@ class PostWidget extends StatelessWidget {
                 width: 30,
               ),
 
-              //todo key
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: postModel.medias.asMap().entries.map((entry) {
-                  return GestureDetector(
-                    onTap: () => carouselController.animateToPage(entry.key),
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 4.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: (Colors.black).withOpacity(0.4),
-                      ),
-                      child: carouselController == entry.key
-                          ? Text("$currentIndex/${postModel.medias.length}")
-                          : null,
-                    ),
-                  );
-                }).toList(),
-              ),
               Spacer(),
               IconButton(onPressed: () {}, icon: Icon(Icons.bookmark_border)),
             ],
